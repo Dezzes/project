@@ -10,8 +10,8 @@ function start() {
     }
 }
 
-    start();
-    
+start();
+
 const personalMovieDB = {
     count: numberOfFilms,
     movies: {},
@@ -20,31 +20,49 @@ const personalMovieDB = {
     private: false
 };
 
-for(let i=0; i<2; i++) {
-    const a = prompt("Один из последних просмотренных фильмов?", ""),
-          b = prompt("На сколько оцените его?", "");
-    
-    if (a != null && b != null && a.length < 50 && a != "" && b != "") {
-        personalMovieDB.movies[a] = b;
-        console.log("Done");
+function remeberMyFilms() {
+    for(let i=0; i<2; i++) {
+        const a = prompt("Один из последних просмотренных фильмов?", ""),
+              b = prompt("На сколько оцените его?", "");
+        
+        if (a != null && b != null && a.length < 50 && a != "" && b != "") {
+            personalMovieDB.movies[a] = b;
+            console.log("Done");
+        }
+        else {
+            console.log("Something went wrong");
+            i--;
+        }
+    }
+}
+
+remeberMyFilms();
+
+function detectPersonalLevel() {
+    if(personalMovieDB.count < 10) {
+        console.log("Просмотренно мало фильмов");
+    }
+    else if(personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        console.log("Вы классический зритель");
+    }
+    else if(personalMovieDB.count >= 30) {
+        console.log("Вы киноман");
     }
     else {
-        console.log("Something went wrong");
-        i--;
+        console.log("Произошла ошибка");
     }
 }
 
-if(personalMovieDB.count < 10) {
-    console.log("Просмотренно мало фильмов");
-}
-else if(personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-    console.log("Вы классический зритель");
-}
-else if(personalMovieDB.count >= 30) {
-    console.log("Вы киноман");
-}
-else {
-    console.log("Произошла ошибка");
+detectPersonalLevel();
+
+function showMyDB(hidden) {
+    if(!hidden) {
+        console.log(personalMovieDB);
+    }
 }
 
-console.log(personalMovieDB);
+function writeYourGenres() {
+    for (let i = 1; i <= 3; i++) {
+        personalMovieDB.genres[i-1] = prompt(`Ваш любимый жанр под номером ${i}`, "");
+    }
+}
